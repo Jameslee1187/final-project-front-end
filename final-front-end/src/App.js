@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import TeamContainer from './Containers/TeamContainer'
 
 
 class App extends Component {
@@ -37,7 +37,8 @@ class App extends Component {
     console.log(this.state.foxnews);
     return (
       <div className="App">
-        </div>
+      <TeamContainer/>
+      </div>
     );
   }
 }

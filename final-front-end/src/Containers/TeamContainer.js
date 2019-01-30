@@ -7,8 +7,15 @@ class TeamContainer extends Component {
   }
 
   render() {
+    let teams = this.state.teams.map(team=>{
+      return <p>{team}</p>
+    })
     return (
-      <div></div>
+      <div>
+      <h1>Welcome to Team News from Different Websites!</h1>
+      <h2>Please Click on A Team You Would Like To Get News From</h2>
+      {teams}
+      </div>
     );
   }
 
