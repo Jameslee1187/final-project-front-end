@@ -34,9 +34,10 @@ class App extends Component {
 
   }
   render() {
-    console.log(this.state.foxnews);
     return (
       <div className="App">
+      <h1>Welcome to Team News from Different Websites!</h1>
+
       <TeamContainer/>
       </div>
     );
