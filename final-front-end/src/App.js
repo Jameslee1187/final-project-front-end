@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 
 class App extends Component {
   state={
     brnews: [],
-    espnnews: []
+    espnnews: [],
+    foxnews: []
   }
 
   componentDidMount(){
@@ -24,10 +24,17 @@ class App extends Component {
         espnnews: espnnews.articles
       })
     })
+    fetch("https://newsapi.org/v2/top-headlines?sources=fox-sports&apiKey=0977269cbe4b49a09a909e5240074c6e")
+    .then(res=>res.json())
+    .then(foxnews=>{
+      this.setState({
+        foxnews: foxnews.articles
+      })
+    })
 
   }
   render() {
-    console.log(this.state.espnnews);
+    console.log(this.state.foxnews);
     return (
       <div className="App">
         </div>
