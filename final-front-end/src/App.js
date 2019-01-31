@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TeamContainer from './Containers/TeamContainer'
+import YoutubeBackground from 'react-youtube-background'
+import './App.css'
 
 
 class App extends Component {
@@ -36,9 +38,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <h1>Welcome to Team News from Different Websites!</h1>
-
-      <TeamContainer/>
+        <YoutubeBackground
+          videoId={"3V6U8FrCrc0"}     // default -> "jssO8-5qmag"
+          aspectRatio={"16:9"} // default -> "16:9"
+          overlay={"rgba(255,255,255,.5)"}       // defaults -> null | e.g. "rgba(0,0,0,.4)"
+          className= {"video-background"}   // defaults -> null
+          onReady={null}       // defaults -> null
+          >
+        </YoutubeBackground>
+        <h1>Welcome to Team News from Different Websites!</h1>
+        <TeamContainer/>
       </div>
     );
   }

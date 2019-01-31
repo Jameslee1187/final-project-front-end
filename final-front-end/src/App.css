@@ -22,6 +22,27 @@
   color: #61dafb;
 }
 
+.video-background{
+  background: #000;
+position: fixed;
+top: 0;
+bottom: 0;
+right: 0;
+left: 0;
+z-index: -99;
+&::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0,0,0,0.75)
+}
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

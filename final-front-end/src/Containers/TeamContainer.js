@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewsPage from '../Components/NewsPage'
+import FavoriteTeam from '../Components/FavoriteTeam'
 class TeamContainer extends Component {
 
   state={
@@ -23,9 +24,9 @@ class TeamContainer extends Component {
     })
     return (
       <div>
+      <FavoriteTeam favoriteTeams={this.state.favoriteTeams}/>
           <h2>Please Choose Your Favorite Teams</h2>
             {teams}
-            <NewsPage/>
       </div>
     );
   }
