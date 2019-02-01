@@ -6,36 +6,22 @@ import './App.css'
 
 class App extends Component {
   state={
-    brnews: [],
-    espnnews: [],
-    foxnews: []
+    articles: []
   }
 
   componentDidMount(){
-    fetch("https://newsapi.org/v2/top-headlines?sources=bleacher-report&apiKey=0977269cbe4b49a09a909e5240074c6e")
+    fetch("https://newsapi.org/v2/everything?q=celtics&from=2019-02-01&apiKey=0977269cbe4b49a09a909e5240074c6e")
     .then(res=>res.json())
-    .then(brnews=>{
+    .then(articles=>{
       this.setState({
-        brnews: brnews.articles
-      })
-    })
-    fetch("https://newsapi.org/v2/top-headlines?sources=espn&apiKey=0977269cbe4b49a09a909e5240074c6e")
-    .then(res=>res.json())
-    .then(espnnews=>{
-      this.setState({
-        espnnews: espnnews.articles
-      })
-    })
-    fetch("https://newsapi.org/v2/top-headlines?sources=fox-sports&apiKey=0977269cbe4b49a09a909e5240074c6e")
-    .then(res=>res.json())
-    .then(foxnews=>{
-      this.setState({
-        foxnews: foxnews.articles
+        articles: articles.articles
       })
     })
 
+
   }
   render() {
+    console.log(this.state.articles);
     return (
       <div className="App">
         <YoutubeBackground
@@ -43,7 +29,7 @@ class App extends Component {
           aspectRatio={"16:9"} // default -> "16:9"
           overlay={"rgba(255,255,255,.5)"}       // defaults -> null | e.g. "rgba(0,0,0,.4)"
           className= {"video-background"}   // defaults -> null
-          onReady={null}       // defaults -> null
+
           >
         </YoutubeBackground>
         <h1>Welcome to Team News from Different Websites!</h1>
