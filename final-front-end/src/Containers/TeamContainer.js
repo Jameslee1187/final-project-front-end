@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import NewsPage from '../Components/NewsPage'
 import FavoriteTeam from '../Components/FavoriteTeam'
 class TeamContainer extends Component {
 
   state={
-    teams: ["Atlanta Hawks", "Boston Celtics", "Brooklyn Nets", "Charlotte Bobcats", "Chicago Bulls", "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets", "Detroit Pistons", "Golden State Warriors", "Houston Rockets", "Indiana Pacers", "Los Angeles Clippers", "Los Angeles Lakers", "Memphis Grizzlies", "Miami Heat", "Milwaukee Bucks", "Minnesota Timberwolves", "New Orleans Hornets", "New York Knicks", "Oklahoma City Thunder", "Orlando Magic", "Philadelphia Sixers", "Phoenix Suns", "Portland Trail Blazers", "Sacramento Kings", "San Antonio Spurs", "Toronto Raptors", "Utah Jazz", "Washington Wizards"],
+    teams: [],
     favoriteTeams: []
+  }
+  componentDidMount(){
+    fetch("http://localhost:3000/api/v1/teams")
+    .then(res=>res.json())
+    .then(teams=>{console.log(teams);
+      this.setState({
+        teams: teams.data
+      })
+
+    })
   }
 
   favoriteClick=(favTeam)=>{
@@ -15,16 +26,16 @@ class TeamContainer extends Component {
     }
       this.setState({
       favoriteTeams: newArr
-    },console.log(this.state.favoriteTeams))
+    })
   }
 
   render() {
     let teams = this.state.teams.map(team=>{
-      return <p onClick={()=> this.favoriteClick(team)}>{team}</p>
+      return (<p onClick={()=> this.favoriteClick(team.name)} key={team.id}>{team.name}</p>)
     })
     return (
       <div>
-      <FavoriteTeam favoriteTeams={this.state.favoriteTeams}/>
+        <FavoriteTeam history={this.props.history} favoriteTeams={this.state.favoriteTeams} handleClick={this.props.handleClick} team={this.props.team}/>
           <h2>Please Choose Your Favorite Teams</h2>
             {teams}
       </div>

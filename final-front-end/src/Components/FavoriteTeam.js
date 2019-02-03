@@ -3,16 +3,37 @@ import './FavoriteTeam.scss';
 
 class FavoriteTeam extends Component {
 
+  state={
+    articles: []
+  }
+
+
+  handleClick=(team)=>{
+      console.log(team)
+      this.props.history.push(`/news/${team}`)
+    // fetch(`https://newsapi.org/v2/everything?q=${team}&from=${today}&apiKey=0977269cbe4b49a09a909e5240074c6e`)
+    // .then(res=>res.json())
+    // .then(articles=>{
+    //   this.setState({
+    //     articles: articles.articles
+    //   },console.log(this.state.articles))
+    // })
+  }
+
+
   render() {
     let teams=this.props.favoriteTeams.map(team=>{
-      return <p>{team}</p>
+      return <button onClick={()=>this.handleClick(team)}>{team}</button>
     })
+
+
     return (
+
       <div>
       <h1 className="title">Here is a list of your Favorite Teams</h1>
       <h2 className="click">Please click on a team to get it's news</h2>
-      <p className="favoriteTeam"> {teams}</p>
-      <button className="button">Click here to see to your list of favorite teams </button>
+      <div className="favoriteTeam"> {teams}</div>
+
 
       </div>
     );
