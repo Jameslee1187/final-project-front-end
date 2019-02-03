@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-
+import NewsDetail from './NewsDetail'
+import './Newspage.scss'
 class NewsPage extends Component {
-  state={
-    articles: []
-  }
-  componentDidMount(){
 
+  state={
+    articles: [],
+    article: {}
+  }
+
+  componentDidMount(){
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1;
@@ -17,7 +20,7 @@ class NewsPage extends Component {
         mm = '0' + mm;
       }
       today = yyyy + '-' + mm + '-' + dd;
-    fetch(`https://newsapi.org/v2/everything?q=${this.props.match.params.team}&from=${today}&apiKey=0977269cbe4b49a09a909e5240074c6e`)
+    fetch(`https://newsapi.org/v2/everything?language=en&q=${this.props.match.params.team}&from=${today}&apiKey=0977269cbe4b49a09a909e5240074c6e`)
     .then(res=>res.json())
     .then(articles=>{
       this.setState({
@@ -25,13 +28,24 @@ class NewsPage extends Component {
       },()=>console.log(this.state.articles))
     })
   }
+
+  handleArticle=(article)=>{
+    this.setState({
+      article: article
+    })
+  }
   render() {
     let articles = this.state.articles.map(article=>{
-      return <p>{article.title}</p>
+      console.log(article.content);
+      return (<div onClick={()=>this.handleArticle(article)}>
+              <p >{article.title}</p>
+              <img className= "sports-image" src={article.urlToImage}/>
+            </div>)
     })
     return (
       <div>
         {articles}
+        <NewsDetail article={this.state.article}/>
       </div>
     );
   }

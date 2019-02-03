@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import './FavoriteTeam.scss';
 
 class FavoriteTeam extends Component {
@@ -10,20 +11,14 @@ class FavoriteTeam extends Component {
 
   handleClick=(team)=>{
       console.log(team)
-      this.props.history.push(`/news/${team}`)
-    // fetch(`https://newsapi.org/v2/everything?q=${team}&from=${today}&apiKey=0977269cbe4b49a09a909e5240074c6e`)
-    // .then(res=>res.json())
-    // .then(articles=>{
-    //   this.setState({
-    //     articles: articles.articles
-    //   },console.log(this.state.articles))
-    // })
+    this.props.history.push(`/news/${team}`)
+
   }
 
 
   render() {
     let teams=this.props.favoriteTeams.map(team=>{
-      return <button onClick={()=>this.handleClick(team)}>{team}</button>
+      return <Link to = {`/news/${team}`}>{team}</Link>
     })
 
 
