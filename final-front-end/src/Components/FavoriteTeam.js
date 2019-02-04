@@ -4,9 +4,6 @@ import './FavoriteTeam.scss';
 
 class FavoriteTeam extends Component {
 
-  state={
-    articles: []
-  }
 
 
   handleClick=(team)=>{

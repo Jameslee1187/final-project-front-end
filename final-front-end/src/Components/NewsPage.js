@@ -39,7 +39,7 @@ class NewsPage extends Component {
       console.log(article.content);
       return (<div onClick={()=>this.handleArticle(article)}>
               <p >{article.title}</p>
-              <img className= "sports-image" src={article.urlToImage}/>
+              <img className= "sports-image" src={article.urlToImage} alt=''/>
             </div>)
     })
     return (
