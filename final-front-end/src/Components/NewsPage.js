@@ -5,7 +5,9 @@ class NewsPage extends Component {
 
   state={
     articles: [],
-    article: {}
+    article: {},
+    search: '',
+    articleSearch: []
   }
 
   componentDidMount(){
@@ -24,8 +26,19 @@ class NewsPage extends Component {
     .then(res=>res.json())
     .then(articles=>{
       this.setState({
-        articles: articles.articles
+        articles: articles.articles,
+        articleSearch: articles.articles
       },()=>console.log(this.state.articles))
+    })
+  }
+
+  handleArticleSearch=(e)=>{
+    let newArr = [...this.state.articleSearch].filter(searching=>{
+      return searching.title.toLowerCase().includes(e.target.value.toLowerCase())
+    })
+    this.setState({
+      search: e.target.value,
+      articles: newArr
     })
   }
 
@@ -45,6 +58,7 @@ class NewsPage extends Component {
     return (
       <div>
         {articles}
+        <input onChange={(e)=>this.handleArticleSearch(e)} value={this.state.search} type='text' placeholder="Search for a keyword for an article"/>
         <NewsDetail article={this.state.article}/>
       </div>
     );
