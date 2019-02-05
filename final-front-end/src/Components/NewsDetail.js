@@ -6,7 +6,11 @@ class NewsDetail extends Component {
   render() {
     return (
       <div>
-    <Link to ={`article/${this.props.article}`}><iframe title= {this.props.article.url} className="new-page" src={this.props.article.url}/></Link>
+      <p>
+      <a href={this.props.article.url}>
+      Fallback link if the page isn't rendering
+      </a>
+      </p>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import { List } from 'semantic-ui-react';
 import './FavoriteTeam.scss';
 
 class FavoriteTeam extends Component {
@@ -7,7 +8,7 @@ class FavoriteTeam extends Component {
 
 
   handleClick=(team)=>{
-      console.log(team)
+      console.log("hey",team)
     this.props.history.push(`/news/${team}`)
 
   }
@@ -15,18 +16,15 @@ class FavoriteTeam extends Component {
 
   render() {
     let teams=this.props.favoriteTeams.map(team=>{
-      return <Link to = {`/news/${team}`}>{team}</Link>
+      console.log("hello",team);
+      return <Link to = {`/news/${team}`}><List.Item>{team}</List.Item></Link>
     })
 
 
     return (
 
       <div>
-      <h1 className="title">Here is a list of your Favorite Teams</h1>
-      <h2 className="click">Please click on a team to get it's news</h2>
-      <div className="favoriteTeam"> {teams}</div>
-
-
+      <List className="favoriteTeam"> {teams}</List>
       </div>
     );
   }

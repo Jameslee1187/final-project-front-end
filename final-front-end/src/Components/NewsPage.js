@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import NewsDetail from './NewsDetail'
+import {Link} from 'react-router-dom';
+import { Input } from 'semantic-ui-react'
 import './Newspage.scss'
 class NewsPage extends Component {
 
@@ -11,6 +13,7 @@ class NewsPage extends Component {
   }
 
   componentDidMount(){
+
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth() + 1;
@@ -38,7 +41,7 @@ class NewsPage extends Component {
     })
     this.setState({
       search: e.target.value,
-      articles: newArr
+      article: newArr
     })
   }
 
@@ -47,18 +50,19 @@ class NewsPage extends Component {
       article: article
     })
   }
+
   render() {
     let articles = this.state.articles.map(article=>{
       console.log(article.content);
-      return (<div onClick={()=>this.handleArticle(article)}>
+      return (<a href={this.state.article.url}><div onClick={()=>this.handleArticle(article)}>
               <p >{article.title}</p>
               <img className= "sports-image" src={article.urlToImage} alt=''/>
-            </div>)
+            </div></a>)
     })
     return (
       <div>
+        <Input className="news-search" onChange={(e)=>this.handleArticleSearch(e)} value={this.state.search} type='text' placeholder="Search for a keyword for an article"/>
         {articles}
-        <input onChange={(e)=>this.handleArticleSearch(e)} value={this.state.search} type='text' placeholder="Search for a keyword for an article"/>
         <NewsDetail article={this.state.article}/>
       </div>
     );

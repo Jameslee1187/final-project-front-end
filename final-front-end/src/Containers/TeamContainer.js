@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import NewsPage from '../Components/NewsPage'
-import FavoriteTeam from '../Components/FavoriteTeam'
+import ReactDOM from 'react-dom';
+import NewsPage from '../Components/NewsPage';
+import FavoriteTeam from '../Components/FavoriteTeam';
+import { Input } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
+import './TeamContainer.scss'
+
 class TeamContainer extends Component {
 
   state={
@@ -30,7 +35,6 @@ class TeamContainer extends Component {
         teams: teams.data,
         searchedTeams: teams.data
       })
-
     })
   }
 
@@ -46,14 +50,26 @@ class TeamContainer extends Component {
 
   render() {
     let teams = this.state.teams.map(team=>{
-      return (<p onClick={()=> this.favoriteClick(team.name)} key={team.id}>{team.name}</p>)
+      return (<div onClick={()=> this.favoriteClick(team.name)} key={team.id}>{team.name} </div>)
     })
     return (
-      <div>
-        <FavoriteTeam history={this.props.history} favoriteTeams={this.state.favoriteTeams} handleClick={this.props.handleClick} team={this.props.team}/>
-        <input onChange={(e)=>this.handleSearch(e)} type="text" placeholder="Enter the team you would like to Search For" value={this.state.search}/>
-          <h2>Please Choose Your Favorite Teams</h2>
-            {teams}
+      <div className= 'flex-parent'>
+      <Grid  divided = 'vertically'>
+        <Grid.Row columns = {2}>
+          <Grid.Column>
+            <h1 >Here is a list of your Favorite Teams</h1>
+            <h2 >Please click on a team to get its news</h2>
+            <FavoriteTeam history={this.props.history} favoriteTeams={this.state.favoriteTeams} handleClick={this.props.handleClick} team={this.props.team}/>
+          </Grid.Column>
+          <Grid.Column>
+            <div >
+              <h2>Please Choose Your Favorite Teams</h2>
+              <Input onChange={(e)=>this.handleSearch(e)} type="text" placeholder="Enter a team name" value={this.state.search}/>
+              {teams}
+            </div>
+            </Grid.Column>
+          </Grid.Row>
+      </Grid>
       </div>
     );
   }

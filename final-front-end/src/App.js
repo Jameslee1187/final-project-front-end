@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom'
 import Home from './Components/Home'
+import './Components/Home.scss'
 import NavBar from './Components/NavBar'
 import TeamContainer from './Containers/TeamContainer'
 import FavoriteTeam from './Components/FavoriteTeam'
@@ -18,7 +19,7 @@ class App extends Component {
           <Route exact path="/" component= {Home}/>
           <Route exact path="/teams" component= {TeamContainer}/>
           <Route exact path="/news/:team" component= {NewsPage}/>
-          <Route exact path="/article/:article" component= {NewsDetail}/>
+          <Route exact path="/article" component= {NewsDetail}/>
       </div>
     );
   }
