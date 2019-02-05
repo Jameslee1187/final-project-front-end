@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NewsDetail from './NewsDetail'
 import {Link} from 'react-router-dom';
-import { Input } from 'semantic-ui-react'
+import { Input, Grid, Card, Image } from 'semantic-ui-react'
 import './Newspage.scss'
 class NewsPage extends Component {
 
@@ -36,12 +36,15 @@ class NewsPage extends Component {
   }
 
   handleArticleSearch=(e)=>{
+    e.preventDefault()
+    console.log(e.target.value);
     let newArr = [...this.state.articleSearch].filter(searching=>{
-      return searching.title.toLowerCase().includes(e.target.value.toLowerCase())
+      return searching.title.toLowerCase().includes(e.target.value.toLowerCase()) || searching.source.name.toLowerCase().includes(e.target.value.toLowerCase())
     })
+    console.log("titties", newArr);
     this.setState({
       search: e.target.value,
-      article: newArr
+      articles: newArr
     })
   }
 
@@ -53,16 +56,34 @@ class NewsPage extends Component {
 
   render() {
     let articles = this.state.articles.map(article=>{
-      console.log(article.content);
-      return (<a href={this.state.article.url}><div onClick={()=>this.handleArticle(article)}>
-              <p >{article.title}</p>
-              <img className= "sports-image" src={article.urlToImage} alt=''/>
-            </div></a>)
+      console.log(article.title);
+      return (<Grid.Column>
+                <a href={this.state.article.url}>
+                  <div onClick={()=>this.handleArticle(article)}>
+                    <Card>
+                      <Image fluid src={article.urlToImage} alt=''/>
+                        <Card.Content>
+                          <Card.Description>
+                            <p>{article.title}</p>
+                          </Card.Description>
+                          <Card.Description>
+                            <p>{article.source.name}</p>
+                          </Card.Description>
+
+                        </Card.Content>
+                    </Card>
+                  </div>
+                  </a>
+                </Grid.Column>)
     })
     return (
       <div>
-        <Input className="news-search" onChange={(e)=>this.handleArticleSearch(e)} value={this.state.search} type='text' placeholder="Search for a keyword for an article"/>
-        {articles}
+        <Input fluid className="news-search" onChange={(e)=>this.handleArticleSearch(e)} value={this.state.search} type='text' placeholder="Search for a keyword for an article"/>
+        <Grid>
+          <Grid.Row columns={3}>
+            {articles}
+          </Grid.Row>
+        </Grid>
         <NewsDetail article={this.state.article}/>
       </div>
     );

@@ -18,6 +18,7 @@ class TeamContainer extends Component {
 
   handleSearch=(e)=>{
     e.preventDefault()
+    
     let newArr = [...this.state.searchedTeams].filter(searched=>{
       return searched.name.toLowerCase().includes(e.target.value.toLowerCase())
     })

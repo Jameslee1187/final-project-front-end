@@ -8,7 +8,6 @@ class NewsDetail extends Component {
       <div>
       <p>
       <a href={this.props.article.url}>
-      Fallback link if the page isn't rendering
       </a>
       </p>
       </div>

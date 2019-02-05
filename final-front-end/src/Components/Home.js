@@ -14,7 +14,7 @@ class Home extends Component {
           Please Sign In<br/><br/>
         <input type="text" placeholder="username"/><br/>
         <input type="text" placeholder="password"/><br/><br/>
-        <Button>Submit</Button><br/><br/>
+        <Button>Sign In</Button><br/><br/>
         <Button>New User? Sign Up!</Button>
         </form>
         <YoutubeBackground videoId={"3V6U8FrCrc0"} aspectRatio={"16:9"} overlay={"rgba(255,255,255,.5)"} className= {"video-background"}></YoutubeBackground>

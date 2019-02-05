@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { List } from 'semantic-ui-react';
+import { Icon, List,  } from 'semantic-ui-react';
 import './FavoriteTeam.scss';
 
 class FavoriteTeam extends Component {
@@ -17,14 +17,23 @@ class FavoriteTeam extends Component {
   render() {
     let teams=this.props.favoriteTeams.map(team=>{
       console.log("hello",team);
-      return <Link to = {`/news/${team}`}><List.Item>{team}</List.Item></Link>
+      return <Link to = {`/news/${team}`}>
+              <List.Item>
+                <List.Icon name='basketball ball' color='orange'/>
+                <List.Content>
+                  <List.Header>{team}</List.Header>
+                </List.Content>
+              </List.Item>
+            </Link>
     })
 
 
     return (
 
       <div>
-      <List className="favoriteTeam"> {teams}</List>
+      <List animated verticalAlign='middle'>
+        {teams}
+      </List>
       </div>
     );
   }
