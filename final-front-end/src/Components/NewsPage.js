@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NewsDetail from './NewsDetail'
 import {Link} from 'react-router-dom';
 import { Input, Grid, Card, Image } from 'semantic-ui-react'
+import SignUp from './SignUp'
 import './Newspage.scss'
 class NewsPage extends Component {
 

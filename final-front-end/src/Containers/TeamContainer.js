@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import NewsPage from '../Components/NewsPage';
 import FavoriteTeam from '../Components/FavoriteTeam';
-import { Input } from 'semantic-ui-react';
-import { Container, Header } from 'semantic-ui-react';
-import { Grid } from 'semantic-ui-react';
+import { Input, Container, Header, Grid } from 'semantic-ui-react';
 import './TeamContainer.scss'
 
 class TeamContainer extends Component {
@@ -18,7 +16,7 @@ class TeamContainer extends Component {
 
   handleSearch=(e)=>{
     e.preventDefault()
-    
+
     let newArr = [...this.state.searchedTeams].filter(searched=>{
       return searched.name.toLowerCase().includes(e.target.value.toLowerCase())
     })
@@ -64,6 +62,7 @@ class TeamContainer extends Component {
           </Grid.Column>
           <Grid.Column>
             <div >
+              <h1>Welcome {localStorage.getItem("username")}</h1>
               <h2>Please Choose Your Favorite Teams</h2>
               <Input onChange={(e)=>this.handleSearch(e)} type="text" placeholder="Enter a team name" value={this.state.search}/>
               {teams}
