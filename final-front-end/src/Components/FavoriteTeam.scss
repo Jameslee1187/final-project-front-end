@@ -16,3 +16,22 @@
   margin-left: -900px;
   margin-top: 100px;
 }
+
+.basketball-line{
+  position: relative;
+  transition: background-color 0.5s, left 0.5s, color 0.5s;
+  left:0px;
+}
+
+.basketball-line:hover{
+  background-color: rgba(23, 64, 139, 1);
+  left: 20px;
+  color: white;
+}
+
+.delete{
+  background-color: rgba(201, 8, 42, 1)!important;
+  padding-top: 5px!important;
+  padding-bottom: 5px!important;
+  color: white!important;
+}

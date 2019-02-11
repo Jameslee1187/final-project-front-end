@@ -11,7 +11,8 @@ class TeamContainer extends Component {
     teams: [],
     favoriteTeams: [],
     searchedTeams: [],
-    search: ""
+    search: "",
+    team: {}
   }
 
   handleSearch=(e)=>{
@@ -27,29 +28,71 @@ class TeamContainer extends Component {
   }
 
   componentDidMount(){
+    console.log(`Bearer ${localStorage.getItem("token")}`)
     fetch("http://localhost:3000/api/v1/teams")
     .then(res=>res.json())
-    .then(teams=>{console.log(teams);
+    .then(teams=>{
+      console.log(teams);
       this.setState({
         teams: teams.data,
         searchedTeams: teams.data
       })
     })
+    fetch("http://localhost:3000/api/v1/favorites",{
+    headers:{
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+  .then(res=>res.json())
+  .then(arrayOfFavoritedTeamsFromTheBackEnd=>{
+    console.log(arrayOfFavoritedTeamsFromTheBackEnd);
+    let newArr= arrayOfFavoritedTeamsFromTheBackEnd
+    let origArr=[...this.state.teams].filter(team=>{
+      return !arrayOfFavoritedTeamsFromTheBackEnd.find(favorite=>{
+        return favorite.name === team.name
+      })
+    })
+    this.setState({
+      favoriteTeams: newArr,
+      teams: origArr
+    })
+  })
   }
 
   favoriteClick=(favTeam)=>{
-    let newArr=[...this.state.favoriteTeams]
-    if(!newArr.includes(favTeam)){
-      newArr.push(favTeam)
-    }
-      this.setState({
-      favoriteTeams: newArr
+
+    fetch("http://localhost:3000/api/v1/favorites",{
+      method: 'POST',
+      body: JSON.stringify({
+        team_id: favTeam.id
+      }),
+      headers:{
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     })
+  .then(res=>res.json())
+  .then(fav=>{
+    console.log(fav.team.name);
+    let newArr=[...this.state.favoriteTeams, fav.team]
+    let origArr=[...this.state.teams].filter(team=>{
+      console.log(team.name);
+      return team.name !== fav.team.name
+    })
+    this.setState({
+      favoriteTeams: newArr,
+      teams: origArr
+    })
+  })
   }
+
 
   render() {
     let teams = this.state.teams.map(team=>{
-      return (<div onClick={()=> this.favoriteClick(team.name)} key={team.id}>{team.name} </div>)
+      return (<div onClick={()=> this.favoriteClick(team)} key={team.id}>{team.name} </div>)
     })
     return (
       <div className= 'flex-parent'>

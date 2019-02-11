@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Button, CheckBox, Form} from 'semantic-ui-react'
 class SignUp extends Component {
 
   state={
@@ -19,12 +19,12 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-      <form onSubmit={(e)=>this.props.handleSignUp(e, this.state)}>
-        Please Fill Out The Form<br/><br/>
+      <Form onSubmit={(e)=>this.props.handleSignUp(e, this.state)}>
+        Please Enter Your Desired Username and Password <br/><br/>
       <input onChange={(e)=>this.handleChange(e)} type="text" placeholder="Username" name='username' value={this.state.username}/><br/>
-      <input onChange={(e)=>this.handleChange(e)} type="text" placeholder="Password" name='password' value={this.state.password}/><br/><br/>
-      <button>Submit</button>
-      </form>
+      <input onChange={(e)=>this.handleChange(e)} type="password" placeholder="Password" name='password' value={this.state.password}/><br/><br/>
+      <Button>Submit</Button>
+      </Form>
       </div>
     );
   }

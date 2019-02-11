@@ -20,13 +20,11 @@ class App extends Component {
   handleSignUp=(e, newUser)=>{
     e.preventDefault()
     this.submitUser(newUser)
-    this.props.history.push('/teams')
   }
 
   handleLogIn=(e, newUser)=>{
     e.preventDefault()
     this.getUser(newUser)
-    this.props.history.push('/teams')
   }
 
   getUser=(newUser)=>{
@@ -43,14 +41,20 @@ class App extends Component {
   })
   .then(res => res.json())
   .then(user => {
-    console.log(user);
-    localStorage.setItem("token", user.jwt);
-    localStorage.setItem("username", user.user.username)
-    this.setState({
+    if (user.result === "Failure"){
+      alert("Username and/or Password is Incorrect.")
+    }else{
+
+      console.log(user);
+      localStorage.setItem("token", user.jwt);
+      localStorage.setItem("username", user.user.username)
+      this.setState({
         user: user.user
-    })
+      })
+      this.props.history.push('/teams')
+    }
   })
-  }
+    }
 
 
 
@@ -66,10 +70,13 @@ class App extends Component {
   })
   .then(res => res.json())
   .then(newUser => {
+    console.log(newUser.user.username);
     localStorage.setItem("token", newUser.jwt);
+    localStorage.setItem("username", newUser.user.username);
     this.setState({
         user: newUser.user
     })
+    this.props.history.push('/teams')
   })
   }
 
@@ -78,8 +85,9 @@ class App extends Component {
       <div className="App">
           <div><NavBar/></div>
           <Route exact path="/" render={()=> <Home handleLogIn={this.handleLogIn}/>}/>
-          <Route exact path="/teams" render={()=> <TeamContainer/>}/>
+          <Route exact path="/teams" render={()=> <TeamContainer user={this.state.user}/>}/>
           <Route exact path="/article" component= {NewsDetail}/>
+            <Route exact path="/news/:team" component= {NewsPage}/>
           <Route exact path="/signup" render={()=> <SignUp handleSignUp={this.handleSignUp}/>}/>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'semantic-ui-react'
+import {Button, CheckBox, Form} from 'semantic-ui-react'
 import YoutubeBackground from 'react-youtube-background'
 import {Link} from 'react-router-dom';
 import SignUp from './SignUp'
@@ -19,20 +19,23 @@ class Home extends Component {
   }
 
   logInShowUp=()=>{
-    if(localStorage.length === 0){
-      return (<div >
+    if(!localStorage.token){
+      return (<div>
         <div className="home-div">
-          <h1 className='home-title'>Welcome to All in One Sports!</h1>
-        </div>
+          <h1 className='home-title'>Welcome to HASHKETBALL!</h1>
           <h2>Please Sign In</h2><br/><br/>
-      <form onSubmit={(e)=>this.props.handleLogIn(e, this.state)}>
-          <input onChange={(e)=>this.handleChange(e)} type="text" placeholder="Username" name='loginUserName' value={this.state.loginUserName}/><br/>
-          <input onChange={(e)=>this.handleChange(e)} type="text" placeholder="Password" name='loginPassword' value={this.state.loginPassword}/><br/><br/>
-          <Button>Submit</Button><br/><br/>
-        </form>
-
+            <div className='form'>
+              <Form onSubmit={(e)=>this.props.handleLogIn(e, this.state)}>
+                <Form.Field>
+                  <input onChange={(e)=>this.handleChange(e)} type="text" placeholder="Username" name='loginUserName' value={this.state.loginUserName}/><br/>
+                  <input onChange={(e)=>this.handleChange(e)} type="password" placeholder="Password" name='loginPassword' value={this.state.loginPassword}/><br/><br/>
+                  <Button>Submit</Button><br/><br/>
+                </Form.Field>
+              </Form>
+            </div>
+        </div>
         <Link to='/signup'><Button>New User? Sign Up!</Button></Link>
-        <YoutubeBackground videoId={"3V6U8FrCrc0"} aspectRatio={"16:9"} overlay={"rgba(255,255,255,.5)"} className= {"video-background"}></YoutubeBackground>
+        <YoutubeBackground videoId={"9JYkp4VkOwY"} aspectRatio={"16:9"} overlay={"rgba(255,255,255,.5)"} className= {"video-background"}></YoutubeBackground>
       </div>)
     }else{
       return(
