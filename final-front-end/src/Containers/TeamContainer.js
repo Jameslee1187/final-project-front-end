@@ -74,10 +74,8 @@ class TeamContainer extends Component {
     })
   .then(res=>res.json())
   .then(fav=>{
-    console.log(fav.team.name);
     let newArr=[...this.state.favoriteTeams, fav.team]
     let origArr=[...this.state.teams].filter(team=>{
-      console.log(team.name);
       return team.name !== fav.team.name
     })
     this.setState({
@@ -99,13 +97,30 @@ class TeamContainer extends Component {
     })
     .then(res=>res.json())
     .then(deletes=>console.log(deletes))
+    console.log(clickedTeam.name);
+    let otherTeams = [...this.state.teams, clickedTeam]
+    otherTeams.sort(function(a,b){
+      let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+    if (nameA < nameB){
 
+        return -1
+      }
+    if (nameA > nameB){
+
+        return 1
+      }
+    return 0
+  })
+    console.log(otherTeams);
     let deletedTeam = this.state.favoriteTeams.filter(team=>{
       return team.name !== clickedTeam.name
+
     })
     this.setState({
-      favoriteTeams: deletedTeam
-    },()=>console.log("hey", this.state.favoriteTeams))
+      favoriteTeams: deletedTeam,
+      teams: otherTeams
+
+    })
   }
 
 

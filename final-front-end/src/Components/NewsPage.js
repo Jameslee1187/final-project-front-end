@@ -63,7 +63,7 @@ class NewsPage extends Component {
       let foundCopy = newArr.find(copyarticle=>{
         return copyarticle.title == article.title
       })
-      if (foundCopy == undefined){
+      if(foundCopy == undefined){
         newArr.push(article)
       }
     })

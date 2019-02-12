@@ -41,7 +41,8 @@ class App extends Component {
   })
   .then(res => res.json())
   .then(user => {
-    if (user.result === "Failure"){
+    console.log(user);
+    if (user.result === "Failure" || user.result === undefined){
       alert("Username and/or Password is Incorrect.")
     }else{
 
