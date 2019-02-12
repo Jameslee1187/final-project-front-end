@@ -10,9 +10,7 @@ class FavoriteTeam extends Component {
     this.props.history.push(`/news/${team}`)
   }
 
-  deleteTeam=(team)=>{
 
-  }
 
 
 
@@ -24,7 +22,7 @@ class FavoriteTeam extends Component {
                 <List.Icon name='basketball ball' color='orange'/>
                 <List.Content style={{"display": "inline-block"}}>
                   <List.Header style={{"display": "inline-block", "width": "300px"}}>{team.name}</List.Header>
-                  <Button className="delete" onClick={()=>this.deleteTeam(team)} style={{"display": "inline-block", marginLeft: "10px"}}>Delete</Button>
+                  <Button className="delete" onClick={(e)=>this.props.deleteTeam(team, e)} style={{"display": "inline-block", marginLeft: "10px"}}>Delete</Button>
                 </List.Content>
               </List.Item>
             </Link>

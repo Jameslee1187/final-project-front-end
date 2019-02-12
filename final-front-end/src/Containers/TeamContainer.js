@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import NewsPage from '../Components/NewsPage';
 import FavoriteTeam from '../Components/FavoriteTeam';
-import { Input, Container, Header, Grid } from 'semantic-ui-react';
+import { Input, Grid } from 'semantic-ui-react';
 import './TeamContainer.scss'
 
 class TeamContainer extends Component {
@@ -89,6 +87,27 @@ class TeamContainer extends Component {
   })
   }
 
+  deleteTeam = (clickedTeam, e) => {
+    e.preventDefault()
+    fetch(`http://localhost:3000/api/v1/favorites/${clickedTeam.id}`,{
+      method: 'DELETE',
+      headers:{
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then(res=>res.json())
+    .then(deletes=>console.log(deletes))
+
+    let deletedTeam = this.state.favoriteTeams.filter(team=>{
+      return team.name !== clickedTeam.name
+    })
+    this.setState({
+      favoriteTeams: deletedTeam
+    },()=>console.log("hey", this.state.favoriteTeams))
+  }
+
 
   render() {
     let teams = this.state.teams.map(team=>{
@@ -101,7 +120,7 @@ class TeamContainer extends Component {
           <Grid.Column>
             <h1 >Here is a list of your Favorite Teams</h1>
             <h2 >Please click on a team to get its news</h2>
-            <FavoriteTeam history={this.props.history} favoriteTeams={this.state.favoriteTeams} handleClick={this.props.handleClick} team={this.props.team}/>
+            <FavoriteTeam history={this.props.history} favoriteTeams={this.state.favoriteTeams} handleClick={this.props.handleClick} team={this.props.team} deleteTeam={this.deleteTeam}/>
           </Grid.Column>
           <Grid.Column>
             <div >

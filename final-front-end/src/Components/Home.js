@@ -20,7 +20,8 @@ class Home extends Component {
 
   logInShowUp=()=>{
     if(!localStorage.token){
-      return (<div>
+      return (
+        <div>
         <div className="home-div">
           <h1 className='home-title'>Welcome to HASHKETBALL!</h1>
           <h2>Please Sign In</h2><br/><br/>

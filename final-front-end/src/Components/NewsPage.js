@@ -72,8 +72,8 @@ class NewsPage extends Component {
 
   render() {
     let articles = this.state.articles.map(article=>{
-      console.log(article.title);
-      return (<Grid.Column>
+      return (
+        <Grid.Column>
                 <a href={this.state.article.url}>
                   <div onClick={()=>this.handleArticle(article)}>
                     <Card>
