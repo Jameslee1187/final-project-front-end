@@ -74,8 +74,8 @@ class NewsPage extends Component {
     let articles = this.state.articles.map(article=>{
       return (
         <Grid.Column>
-                <a href={this.state.article.url}>
-                  <div onClick={()=>this.handleArticle(article)}>
+                <a onClick={() => window.open(this.state.article.url, "_blank")}>
+                  <div onClick={()=> this.handleArticle(article)}>
                     <Card>
                       <Image className='sports-image' fluid src={article.urlToImage} alt=''/>
                         <Card.Content>

@@ -14,3 +14,9 @@ width: 50%;
 margin:auto;
 float: right;
 }
+
+.basketball-line{
+  position: relative;
+  transition: background-color 0.5s, left 0.5s, color 0.5s;
+  left:0px;
+}
