@@ -52,6 +52,7 @@ class NewsPage extends Component {
   }
 
   handleArticle=(article)=>{
+    window.open(article.url)
     this.setState({
       article: article
     })
@@ -72,10 +73,10 @@ class NewsPage extends Component {
 
   render() {
     let articles = this.state.articles.map(article=>{
+      console.log("article",article, "articleurl", this.state.article.url);
       return (
         <Grid.Column>
-                <a onClick={() => window.open(this.state.article.url, "_blank")}>
-                  <div onClick={()=> this.handleArticle(article)}>
+          <div onClick={()=> this.handleArticle(article)}>
                     <Card>
                       <Image className='sports-image' fluid src={article.urlToImage} alt=''/>
                         <Card.Content>
@@ -88,8 +89,8 @@ class NewsPage extends Component {
 
                         </Card.Content>
                     </Card>
+
                   </div>
-                  </a>
                 </Grid.Column>)
     })
     return (
@@ -101,7 +102,6 @@ class NewsPage extends Component {
             {articles}
           </Grid.Row>
         </Grid>
-        <NewsDetail article={this.state.article}/>
       </div>
     );
   }
