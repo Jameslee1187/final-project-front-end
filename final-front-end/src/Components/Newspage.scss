@@ -1,8 +1,13 @@
 .news-search{
-  margin-top: 80px;
+  margin-top: 20px;
+  position: absolute;
+  transition: .2s ease all;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .sports-image{
   height: 300px;
   width: 300px;
-  object-fit: scale-down;
+  object-fit: cover;
 }

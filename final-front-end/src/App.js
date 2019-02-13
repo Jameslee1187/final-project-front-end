@@ -85,11 +85,12 @@ class App extends Component {
     return (
       <div className="App">
           <div><NavBar/></div>
-          <Route exact path="/" render={()=> <Home handleLogIn={this.handleLogIn}/>}/>
+          
           <Route exact path="/teams" render={()=> <TeamContainer user={this.state.user}/>}/>
           <Route exact path="/article" component= {NewsDetail}/>
             <Route exact path="/news/:team" component= {NewsPage}/>
           <Route exact path="/signup" render={()=> <SignUp handleSignUp={this.handleSignUp}/>}/>
+          <Route exact path="/" render={()=> <Home handleLogIn={this.handleLogIn}/>}/>
       </div>
     );
   }

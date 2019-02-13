@@ -15,7 +15,7 @@ class NavBar extends Component {
          const { activeItem } = this.state
      if(!localStorage.token){
        return(
-         <Link to ="/"><Menu.Item name='LogIn' active={activeItem ==='LogIn'}></Menu.Item></Link>
+         null
        )
      }else{
        return(

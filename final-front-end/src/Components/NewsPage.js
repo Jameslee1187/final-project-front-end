@@ -53,9 +53,7 @@ class NewsPage extends Component {
 
   handleArticle=(article)=>{
     window.open(article.url)
-    this.setState({
-      article: article
-    })
+
   }
 
   filterArticles=(articles)=>{
@@ -77,8 +75,8 @@ class NewsPage extends Component {
       return (
         <Grid.Column>
           <div onClick={()=> this.handleArticle(article)}>
-                    <Card>
-                      <Image className='sports-image' fluid src={article.urlToImage} alt=''/>
+                    <Card style={{"margin-bottom":"10px", 'margin': "5em"}}>
+                      <Image className='sports-image' src={article.urlToImage} alt=''/>
                         <Card.Content>
                           <Card.Description>
                             <p>{article.title}</p>
@@ -97,6 +95,7 @@ class NewsPage extends Component {
 
       <div>
         <Input fluid className="news-search" onChange={(e)=>this.handleArticleSearch(e)} value={this.state.search} type='text' placeholder="Search for a keyword for an article"/>
+        <br/>
         <Grid>
           <Grid.Row columns={3}>
             {articles}
