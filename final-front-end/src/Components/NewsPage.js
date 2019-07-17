@@ -34,6 +34,7 @@ class NewsPage extends Component {
         articles: uniqueArticles,
         articleSearch: uniqueArticles
       },()=>console.log(this.state.articles))
+      console.log(this.props.match)
     })
 
   }

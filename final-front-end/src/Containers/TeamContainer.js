@@ -125,7 +125,7 @@ class TeamContainer extends Component {
   render() {
     let teams = this.state.teams.map(team=>{
       return (
-        <List.Item style={{"cursor": "pointer" }}>
+        <List.Item style={{"cursor": "pointer"}}>
           <List.Content
             style={{"display": "inline-block","position":"relative"}}
             onClick={()=> this.favoriteClick(team)} key={team.id}>
